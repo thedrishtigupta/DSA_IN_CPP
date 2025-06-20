@@ -8,9 +8,9 @@ int main() {
     cout <<"Enter directions: ";
     while (cin.get(ch) && ch != '\n') {
         if (ch == 'N') y++;
-        else if (ch == 'E') x++;
-        else if (ch == 'W') x--;
-        else if (ch == 'S') y--;
+        else if (ch == 'E' || ch == 'e') x++;
+        else if (ch == 'W' || ch == 'w') x--;
+        else if (ch == 'S' || ch == 's') y--;
     }
     // cout <<"x = "<<x<<" , y = "<<y<<endl; // Testing
 
