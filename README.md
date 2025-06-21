@@ -1,18 +1,30 @@
-# C++ & DSA Practice
+# DSA_IN_CPP 🚀
 
-This repository contains my C++ and Data Structures & Algorithms practice code.
+This repository contains my personal journey and practice for mastering **Data Structures and Algorithms (DSA)** using **C++**.  
+Organized by topic and progressively built as I learn and solve problems — from basics to advanced concepts.
 
-## Structure
+## 🧠 What I'm Learning
 
-- `cpp-basics/`: General C++ programs and practice
-  - `CB-class/`: Programs written in Coding Blocks classes
-  - `book-practice/`: Personal practice from C++ books
+- Problem-solving patterns
+- Clean and efficient code in C++
+- Dry running and optimization techniques
+- Preparing for coding interviews
 
-- `dsa/`: Categorized DSA problems
-  - `dsa-basics/`
-  - `arrays_vectors/`
-  - `strings/`
-  - `linked_lists/`
-  - (more to be added)
+## 🛠️ Tools
 
-I'll be updating this repo as I learn new topics.
+- Language: C++
+- IDE: VS Code
+- Version Control: Git & GitHub
+
+## ✨ Future Additions
+
+- Linked Lists, Stacks, Queues
+- Trees & Graphs
+- Sliding Window, DP, and more
+- Readable Notes / Patterns
+
+---
+
+> This repo is built with 📚 consistency, 💡 curiosity, and a bit of ✨ caffeine.
+
+✨ *"Choosing faith over fear. ~ Drishti Gupta"*
