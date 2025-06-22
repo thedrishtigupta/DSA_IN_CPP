@@ -4,10 +4,16 @@ using namespace std;
 
 void bubble_sort(int arr[], int n) {
     for (int i = 0; i < n - 1; i++) {
+        int sorted = 1;
         for (int j = 0; j < n-i-1; j++) {
             if (arr[j] > arr[j+1]) {
                 swap(arr[j], arr[j+1]);
+                sorted = 0;
             }
+        }
+        if (sorted) {
+            cout<<"No. of passes: "<<i+1<<endl;
+            break;
         }
     }
 }

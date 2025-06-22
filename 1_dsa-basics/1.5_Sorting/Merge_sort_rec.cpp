@@ -1,13 +1,31 @@
 #include <iostream>
 using namespace std;
 
-void Merge(int arr[], int start, int end) {
+void Inplace_merge(int arr[], int start, int mid, int end) { // not preferred, T.C. O(n^2), S.C. O(1)
+    int i = start, j = mid+1;
+
+    if (arr[mid] <= arr[j]) return; // edge case
+
+    while (i <= mid && j <= end) {
+        if (arr[i] > arr[j]) {
+            int temp = arr[j];
+            int index = j;
+
+            while (index > i) {
+                arr[index] = arr[index-1];
+                index--;
+            }
+            arr[i] = temp;
+            i++; j++; mid++;
+        } else i++;
+    }
+}
+void Merge(int arr[], int start, int end) { //T.C. O(nlogn), S.C. O(n)
 
     int mid = start + ((end-start)/2);
 
     int m = mid - start + 1, n = end - mid;
 
-    //Creating 2 temp arrays
     int *A = new int[m];
     int *B = new int[n];
 
@@ -43,18 +61,32 @@ void MergeSort(int arr[], int start, int end) {
 
     MergeSort(arr,start, mid);
     MergeSort(arr,mid+1, end);
-    Merge(arr, start, end);
+    Inplace_merge(arr, start, mid, end);
 
 }
+
+void print_array(int arr[], int n) {
+    for (int i = 0; i < n ; i++) {
+        cout<<arr[i]<<"\t";
+    } cout<<endl;
+}
+
 int main() {
-    int arr[8] = {9,3,7,5,6,4,8,2};
-    int n = 8;
+    int arr[100];
 
-    MergeSort(arr, 0, 7);
+    int n;
+    cout<<"Enter size of array: ";
+    cin>> n;
 
-    for (int i = 0; i < n; i++) {
-        cout<<arr[i] <<"\t";
+    cout<<"Enter elements of array: ";
+    for (int i = 0; i < n ; i++) {
+        cin>> arr[i];
     }
-    cout<<endl;
+
+    print_array(arr, n);
+
+    MergeSort(arr, 0, n-1);
+
+    print_array(arr, n);
     return 0;
 }

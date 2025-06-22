@@ -1,6 +1,13 @@
 #include <iostream>
 using namespace std;
 
+void printCelsius(int start, int end, int step) {
+    cout<<"°F\t°C"<<endl;
+
+    for (int i = start; i <= end; i+=step) {
+        cout<<i<<"\t"<<(5.0/9.0)*(i-32)<<endl;
+    }
+}
 int main() {
     
     int start, end, step;
@@ -12,11 +19,7 @@ int main() {
     cout<<"Enter step value: ";
     cin>>step;
 
-    cout<<"°F\t°C"<<endl;
-
-    for (int i = start; i <= end; i+=step) {
-        cout<<i<<"\t"<<(5.0/9.0)*(i-32)<<endl;
-    }
+    printCelsius(start, end, step);
     
     return 0;
 }
