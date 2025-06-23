@@ -7,9 +7,9 @@ int main() {
     cout<<"Enter a character: ";
     cin>>ch;
 
-    if (ch >= 'a' && ch <= 'z') {
+    if (ch >= 97 && ch <= 122) {
         cout<<"Lowercase char"<<endl;
-    } else if (ch >= 'A' && ch <= 'Z') {
+    } else if (ch >= 65 && ch <= 90) {
         cout<<"Uppercase char"<<endl;
     } else {
         cout<<"Invalid"<<endl;
