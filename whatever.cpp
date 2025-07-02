@@ -1,23 +1,26 @@
 #include<iostream>
 using namespace std;
-int lcm(int a, int b) {
-        int gcd = 1, lcm = 1, max;
-		if (a > b) max = a;
-		else max = b;
-        for (int i = 1; i <= max/2; i++) {
-            if (a % i == 0 && b % i == 0) {
-                gcd = i;
-            }
-        }
-        lcm = (a*b) / gcd;
-        return lcm;
-    }
+
 int main() {
-	int n1, n2;
-	cin>>n1>>n2;
-
-	if ((n1 < 0 || n2 < 0) || n1 > 1000000000 || n2 > 1000000000) return 0;
-
-	cout<<lcm(n1,n2);
+	int n;
+    cin>>n;
+    int space, star;
+    for (int i = 1; i <= n; i++) {
+        if (i > n/2) {
+            space = (2*i - n - 1)/2;
+            star = 2*(n-i) + 1;
+        } else {
+            space = (n + 1 - 2*i)/2;
+            star = 2*i - 1;
+        }
+        for (int j = 1; j <= space; j++) {
+            cout<<"  ";
+        }
+        for (int j = 1; j <= star; j++) {
+            if (j == 1 || j == star) cout <<"* ";
+            else cout<<"  ";
+        }
+        cout<<endl;
+    }
 	return 0;
 }
