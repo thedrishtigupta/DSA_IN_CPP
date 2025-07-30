@@ -4,14 +4,14 @@ using namespace std;
 
 int lower_bound(vector<int>& arr, int x) {
     int n = arr.size();
-    int i = 0, j = n-1, ans = n;
+    int i = 0, j = n - 1, ans = n;
     while (i <= j) {
-        int m = i + ((j-i)/2);
-        if (x > arr[m]) i = m+1;
-        else if (x <= arr[m]) {
-            j = m -1;
+        int m = i + (j - i) / 2;
+        if (x <= arr[m]) {
             ans = m;
-            if (arr[m-1] != x) break;
+            j = m - 1;
+        } else {
+            i = m + 1;
         }
     }
     return ans;

@@ -1,6 +1,11 @@
 #include <iostream>
 using namespace std;
+// void insert(int *a, int curr, int prev) {
+//     if(prev < 0 || a[prev] <= curr) return;
 
+//     a[prev+1] = a[prev];
+
+// }
 void Recursive_insertion_sort(int arr[], int n) {
     if (n <= 1) return;
 
