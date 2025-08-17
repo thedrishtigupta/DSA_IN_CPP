@@ -2,6 +2,23 @@
 #include <vector>
 using namespace std;
 
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        int n=nums.size();
+        vector<vector<int>> ans;
+
+        for(int mask=0; mask < (1<<n); mask++){
+            vector<int> temp;
+            for(int i=0; i<n; i++){
+                if((1<<i)&mask) temp.push_back(nums[i]);
+            }
+            ans.push_back(temp);
+        }
+        return ans;
+    }
+};
+
 void printSub(vector<int>& arr, vector<int>& ans, int n, int i = 0) {
     if (i == n) {
         for (int val : ans) cout<<val<<" ";
