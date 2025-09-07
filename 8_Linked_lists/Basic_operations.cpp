@@ -106,7 +106,7 @@ class LinkedList {
 
         Node* temp = head;
         for (int i = 0; i < pos-1; i++) temp = temp->next;
-        cout<<"Deleteing pos"<<endl;
+        
         Node* n = temp->next;
         temp->next = n->next;
         delete n;
