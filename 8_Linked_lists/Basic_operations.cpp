@@ -92,7 +92,9 @@ class LinkedList {
         else if (head->next == NULL) {delete head; head = tail = NULL;}
         else {
             Node* temp = head;
-            while((temp->next)->next != NULL) temp = temp->next;
+            // while((temp->next)->next != NULL) temp = temp->next; // does work, but we have access to tail
+            while (temp->next != tail) temp = temp->next;
+            delete tail;
             tail= temp;
             temp->next = NULL;
         }
@@ -100,16 +102,14 @@ class LinkedList {
 
     void deletePos(int pos) {
         if (pos == 0) {deleteFront(); return;}
-        if (pos >= lengthLL()) {deleteBack(); return;}
+        if (pos >= lengthLL()-1) {deleteBack(); return;}
 
         Node* temp = head;
         for (int i = 0; i < pos-1; i++) temp = temp->next;
-        
-        Node* toDelete = temp->next;
-        temp->next = toDelete->next;
-        delete toDelete;
-
-        if (temp->next == NULL) tail = temp;
+        cout<<"Deleteing pos"<<endl;
+        Node* n = temp->next;
+        temp->next = n->next;
+        delete n;
     }
 };
 
@@ -146,7 +146,7 @@ int main() {
     L1.printLL();
     cout<<L1.lengthLL()<<endl;
 
-    L1. deletePos(2);
+    L1. deletePos(4);
     L1.printLL();
     return 0;
 }
