@@ -157,6 +157,21 @@ class LinkedList {
         }
         return ans;
     }
+
+    int findKthLast(int k) {
+        if (head == NULL || head->next == NULL) return 0;
+        Node* s = head;
+        Node* f = head;
+        while (k--) {
+            f = f->next;
+        }
+
+        while (f != NULL) {
+            f = f->next;
+            s = s->next;
+        }
+        return s->data;
+    }
 };
 
 // void printLL(Node* h) {
@@ -200,5 +215,6 @@ int main() {
     // else cout<<"Key not found"<<endl;
 
     cout<<L1.middleLL()<<endl;
+    cout<<L1.findKthLast(3)<<endl;
     return 0;
 }
