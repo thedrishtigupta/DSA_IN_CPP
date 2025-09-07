@@ -76,6 +76,41 @@ class LinkedList {
         }
         return count;
     }
+
+    void deleteFront() {
+        if (head == NULL) return;
+        else if (head->next == NULL) {delete head; head = tail = NULL;}
+        else {
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
+
+    void deleteBack() {
+        if (head == NULL) return;
+        else if (head->next == NULL) {delete head; head = tail = NULL;}
+        else {
+            Node* temp = head;
+            while((temp->next)->next != NULL) temp = temp->next;
+            tail= temp;
+            temp->next = NULL;
+        }
+    }
+
+    void deletePos(int pos) {
+        if (pos == 0) {deleteFront(); return;}
+        if (pos >= lengthLL()) {deleteBack(); return;}
+
+        Node* temp = head;
+        for (int i = 0; i < pos-1; i++) temp = temp->next;
+        
+        Node* toDelete = temp->next;
+        temp->next = toDelete->next;
+        delete toDelete;
+
+        if (temp->next == NULL) tail = temp;
+    }
 };
 
 // void printLL(Node* h) {
@@ -109,6 +144,9 @@ int main() {
     L1.insertAtLast(20);
 
     L1.printLL();
-    cout<<L1.lengthLL();
+    cout<<L1.lengthLL()<<endl;
+
+    L1. deletePos(2);
+    L1.printLL();
     return 0;
 }
