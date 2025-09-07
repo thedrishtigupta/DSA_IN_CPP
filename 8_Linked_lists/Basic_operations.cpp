@@ -136,6 +136,13 @@ class LinkedList {
         }
         return NULL; // either gives segmentation fault or 0
     }
+    Node* searchRec(Node* h, int key) {
+        if (h == NULL) return NULL;
+
+        if (h->data == key) return h;
+
+        return searchRec(h->next, key);
+    }
 };
 
 // void printLL(Node* h) {
@@ -173,7 +180,7 @@ int main() {
     L1.printLL();
     // cout<<L1.searchLL(15);
 
-    Node* ans = L1.searchLL(2);
+    Node* ans = L1.searchRec(L1.head, 15);
     if (ans) cout<<"Key found"<<endl;
     else cout<<"Key not found"<<endl;
     return 0;
