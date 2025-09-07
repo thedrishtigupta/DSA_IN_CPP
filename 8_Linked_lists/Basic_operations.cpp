@@ -126,6 +126,16 @@ class LinkedList {
         }
         swap(head, tail);
     }
+
+    Node* searchLL(int key) { //returning address, as there is no indexing
+        Node* temp = head;
+        while (temp != NULL) {
+            if (temp->data == key) return temp;
+
+            temp = temp->next;
+        }
+        return NULL; // either gives segmentation fault or 0
+    }
 };
 
 // void printLL(Node* h) {
@@ -160,7 +170,11 @@ int main() {
 
     L1.printLL();
 
-    L1.reverseLL();
     L1.printLL();
+    // cout<<L1.searchLL(15);
+
+    Node* ans = L1.searchLL(2);
+    if (ans) cout<<"Key found"<<endl;
+    else cout<<"Key not found"<<endl;
     return 0;
 }
