@@ -143,6 +143,20 @@ class LinkedList {
 
         return searchRec(h->next, key);
     }
+
+    int middleLL() {
+        if (head == NULL || head->next == NULL) return 0;
+        Node* slow = head;
+        Node* fast = head->next;
+        int ans = 0;
+
+        while (fast->next != NULL && fast != NULL) {
+            ans++;
+            slow = slow->next;
+            fast = (fast->next)->next;
+        }
+        return ans;
+    }
 };
 
 // void printLL(Node* h) {
@@ -174,14 +188,17 @@ int main() {
 
     L1.insertAtPos(2, 10);
     L1.insertAtLast(20);
+    L1.insertAtLast(30);
 
     L1.printLL();
 
     L1.printLL();
     // cout<<L1.searchLL(15);
 
-    Node* ans = L1.searchRec(L1.head, 15);
-    if (ans) cout<<"Key found"<<endl;
-    else cout<<"Key not found"<<endl;
+    // Node* ans = L1.searchRec(L1.head, 15);
+    // if (ans) cout<<"Key found"<<endl;
+    // else cout<<"Key not found"<<endl;
+
+    cout<<L1.middleLL()<<endl;
     return 0;
 }
