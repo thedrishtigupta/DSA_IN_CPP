@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 class Node {
@@ -111,6 +112,20 @@ class LinkedList {
         temp->next = n->next;
         delete n;
     }
+
+    void reverseLL() {
+        Node* c = head;
+        Node* p = NULL;
+        Node* n;
+
+        while (c != NULL) {
+            n = c->next;
+            c->next = p;
+            p = c;
+            c = n;
+        }
+        swap(head, tail);
+    }
 };
 
 // void printLL(Node* h) {
@@ -144,9 +159,8 @@ int main() {
     L1.insertAtLast(20);
 
     L1.printLL();
-    cout<<L1.lengthLL()<<endl;
 
-    L1. deletePos(4);
+    L1.reverseLL();
     L1.printLL();
     return 0;
 }
