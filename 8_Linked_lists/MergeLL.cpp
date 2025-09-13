@@ -135,6 +135,21 @@ Node* mergeLL(Node* &a, Node* &b) {
     }
 }
 
+Node* mergeSort(Node* head) {
+    if (head == NULL || head->next == NULL) return head;
+
+    Node* m = midLL(head);
+    Node* a = head;
+    Node* b = m->next;
+    m->next = NULL;
+
+    a = mergeSort(a);
+    b = mergeSort(b);
+
+    Node* c = mergeLL(a, b);
+    return c;
+}
+
 int main() {
     LinkedList L1;
     LinkedList L2;
