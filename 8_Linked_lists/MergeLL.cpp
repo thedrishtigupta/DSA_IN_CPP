@@ -110,6 +110,33 @@ class LinkedList {
         temp->next = n->next;
         delete n;
     }
+
+    void bubbleSortLL() {
+    int len = lengthLL();
+
+    for (int i = 0; i < len-1; i++) {
+        Node* c = head;
+        Node* p = NULL, *n;
+        while (c!= NULL && c->next != NULL) {
+            n = c->next;
+            if (c->data > n->data) { // swapping
+                c->next = n->next;
+                n->next = c;
+                if (p == NULL) { // head change
+                    head = p = n;
+
+                } else { // no head change
+                    p->next = n;
+                    p = n;
+                }
+
+            } else { // no swapping
+                p = c;
+                c = n;
+            }
+        }
+    }
+}
 };
 
 void printLL(Node* &head) {
@@ -135,24 +162,25 @@ Node* mergeLL(Node* &a, Node* &b) {
     }
 }
 
-Node* mergeSort(Node* head) {
-    if (head == NULL || head->next == NULL) return head;
+// Node* mergeSort(Node* head) {
+//     if (head == NULL || head->next == NULL) return head;
 
-    Node* m = midLL(head);
-    Node* a = head;
-    Node* b = m->next;
-    m->next = NULL;
+//     Node* m = midLL(head);
+//     Node* a = head;
+//     Node* b = m->next;
+//     m->next = NULL;
 
-    a = mergeSort(a);
-    b = mergeSort(b);
+//     a = mergeSort(a);
+//     b = mergeSort(b);
 
-    Node* c = mergeLL(a, b);
-    return c;
-}
+//     Node* c = mergeLL(a, b);
+//     return c;
+// }
+
+
 
 int main() {
-    LinkedList L1;
-    LinkedList L2;
+    LinkedList L1, L2, L3;
 
     L1.insertAtLast(1);
     L1.insertAtLast(3);
@@ -162,11 +190,20 @@ int main() {
     L2.insertAtLast(6);
     L2.insertAtLast(7);
 
-    L1.printLL();
-    L2.printLL();
+    // L1.printLL();
+    // L2.printLL();
 
-    Node* c = mergeLL(L1.head, L2.head);
-    printLL(c);
+    L3.insertAtLast(5);
+    L3.insertAtLast(3);
+    L3.insertAtLast(1);
+    L3.insertAtLast(2);
+
+    L3.printLL();
+
+    L3.bubbleSortLL();
+
+    L3.printLL();
+
 
     return 0;
 }
