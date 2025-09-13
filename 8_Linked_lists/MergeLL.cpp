@@ -1,0 +1,157 @@
+#include <iostream>
+using namespace std;
+class Node {
+    public:
+    int data;
+    Node* next;
+    
+    Node(int d) {
+        data = d;
+        next = NULL;
+    }
+
+};
+
+class LinkedList {
+    public:
+    Node* head, *tail;
+    
+    LinkedList() {
+        head = tail = NULL;
+    }
+
+    void insertAtFront(int data) {
+        if (head == NULL) {
+            head = tail = new Node(data);
+            return;
+        }
+        Node* t = new Node(data);
+        t->next = head;
+        head = t;
+    }
+
+    void printLL() {
+        Node* h = head;
+        while (h != NULL) {
+            cout<<h->data <<" -> ";
+            h = h->next;
+        }
+        cout<<"NULL"<<endl;
+    }
+
+    void insertAtLast(int data) {
+        if (head == NULL) {
+            head = tail = new Node(data);
+            return;
+        }
+        Node* n = new Node(data);
+        tail->next = n;
+        tail = n;
+    }
+
+    void insertAtPos(int pos, int data) {
+        if (pos == 0) {
+            insertAtFront(data);
+            return;
+        } else if (pos >= lengthLL()) {
+            insertAtLast(data);
+            return;
+        }
+        Node* t = head;
+
+        for (int i = 0; i < pos-1; i++) t = t->next;
+
+        Node* n = new Node(data);
+        n->next = t->next;
+        t->next = n;
+    }
+
+    int lengthLL() {
+        int count = 0;
+        Node* t = head;
+        while(t != NULL) {
+            count++;
+            t = t->next;
+        }
+        return count;
+    }
+
+    void deleteFront() {
+        if (head == NULL) return;
+        else if (head->next == NULL) {delete head; head = tail = NULL;}
+        else {
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
+
+    void deleteBack() {
+        if (head == NULL) return;
+        else if (head->next == NULL) {delete head; head = tail = NULL;}
+        else {
+            Node* temp = head;
+            // while((temp->next)->next != NULL) temp = temp->next; // does work, but we have access to tail
+            while (temp->next != tail) temp = temp->next;
+            delete tail;
+            tail= temp;
+            temp->next = NULL;
+        }
+    }
+
+    void deletePos(int pos) {
+        if (pos == 0) {deleteFront(); return;}
+        if (pos >= lengthLL()-1) {deleteBack(); return;}
+
+        Node* temp = head;
+        for (int i = 0; i < pos-1; i++) temp = temp->next;
+        
+        Node* n = temp->next;
+        temp->next = n->next;
+        delete n;
+    }
+};
+
+void printLL(Node* &head) {
+        Node* h = head;
+        while (h != NULL) {
+            cout<<h->data <<" -> ";
+            h = h->next;
+        }
+        cout<<"NULL"<<endl;
+    }
+
+Node* mergeLL(Node* &a, Node* &b) {
+    if (a == NULL) return b;
+    if (b == NULL) return a;
+    if (a->data < b->data) {
+        Node* c = a;
+        c->next = mergeLL(a->next, b);
+        return c;
+    } else {
+        Node* c = b;
+        c->next = mergeLL(a, b->next);
+        return c;
+    }
+}
+
+int main() {
+    LinkedList L1;
+    LinkedList L2;
+
+    L1.insertAtLast(1);
+    L1.insertAtLast(3);
+    L1.insertAtLast(5);
+    L2.insertAtLast(2);
+    L2.insertAtLast(4);
+    L2.insertAtLast(6);
+    L2.insertAtLast(7);
+
+    L1.printLL();
+    L2.printLL();
+
+    Node* c = mergeLL(L1.head, L2.head);
+    printLL(c);
+
+    return 0;
+}
