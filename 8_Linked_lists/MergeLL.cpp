@@ -139,6 +139,21 @@ class LinkedList {
 }
 };
 
+
+void breakCycle (Node* head, Node* fast) {
+    Node* s = head;
+    node* pf = head;
+
+    while (pf->next != f) pf = pf->next;
+
+    while (f != s) {
+        pf = f;
+        f = f->next;
+        s = s->next;
+    }
+    pf->next = NULL;
+}
+
 void printLL(Node* &head) {
         Node* h = head;
         while (h != NULL) {
