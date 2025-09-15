@@ -163,12 +163,18 @@ int loopLen(Node* head) {
         s = s->next;
         f = f->next->next;
         len++;
-        if (s == f) break;
+        if (s == f) {
+            int len = 1;
+            Node* t = s->next;
+            while (t != s) {
+                len++;
+                t = t->next;
+            }
+            return len;
+        }
     }
+    return 0;
 
-    if (!f || !f->next) return 0;
-
-    return len;
 }
 
 void printLL(Node* &head) {
