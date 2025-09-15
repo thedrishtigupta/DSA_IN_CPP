@@ -154,6 +154,23 @@ void breakCycle (Node* head, Node* fast) {
     pf->next = NULL;
 }
 
+int loopLen(Node* head) {
+    if (!head || !head->next) return 0;
+    Node* s = head, *f = head;
+    int len = 0;
+
+    while (f && f->next) {
+        s = s->next;
+        f = f->next->next;
+        len++;
+        if (s == f) break;
+    }
+
+    if (!f || !f->next) return 0;
+
+    return len;
+}
+
 void printLL(Node* &head) {
         Node* h = head;
         while (h != NULL) {
