@@ -228,6 +228,26 @@ Node* mergeSort(Node* head) {
     return c;
 }
 
+Node* sortList(Node* &head) {
+        
+        Node* current = head;
+        vector<int> tempArray;
+
+        while(current) {
+            tempArray.push_back(current -> val);
+            current = current -> next;
+        }
+        sort(tempArray.begin(), tempArray.end());
+        current = head;
+        for(int i = 0; i < tempArray.size(); i++) {
+            current -> val = tempArray[i];
+            current = current -> next;
+        }
+
+        return head;
+
+    }
+
 
 
 int main() {
