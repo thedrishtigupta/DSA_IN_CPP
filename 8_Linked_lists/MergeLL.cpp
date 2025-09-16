@@ -199,21 +199,34 @@ Node* mergeLL(Node* &a, Node* &b) {
         return c;
     }
 }
+Node* midLL() {
+        if (head == NULL || head->next == NULL) return NULL;
+        Node* slow = head;
+        Node* fast = head->next;
+        int ans = 0;
 
-// Node* mergeSort(Node* head) {
-//     if (head == NULL || head->next == NULL) return head;
+        while (fast->next != NULL && fast != NULL) {
+            ans++;
+            slow = slow->next;
+            fast = (fast->next)->next;
+        }
+        return ans;
+    }
 
-//     Node* m = midLL(head);
-//     Node* a = head;
-//     Node* b = m->next;
-//     m->next = NULL;
+Node* mergeSort(Node* head) {
+    if (head == NULL || head->next == NULL) return head;
 
-//     a = mergeSort(a);
-//     b = mergeSort(b);
+    Node* m = midLL(head);
+    Node* a = head;
+    Node* b = m->next;
+    m->next = NULL;
 
-//     Node* c = mergeLL(a, b);
-//     return c;
-// }
+    a = mergeSort(a);
+    b = mergeSort(b);
+
+    Node* c = mergeLL(a, b);
+    return c;
+}
 
 
 
