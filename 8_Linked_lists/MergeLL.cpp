@@ -228,6 +228,32 @@ Node* mergeSort(Node* head) {
     return c;
 }
 
+bool isPalindrome(Node* head) {
+        if (!head || !head->next) return true;
+
+        Node* slow = head, *fast = head->next;
+
+        while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        Node* a = head;
+        Node* b = reverseLL(slow->next);
+
+        Node* c = b;
+        bool isPal = true;
+        while (c) {
+            if (a->val != c->val) {isPal = false; break;}
+            a = a->next;
+            c = c->next;
+        }
+
+        slow->next = reverseLL(b);
+
+        return isPal;
+    }
+
 Node* sortList(Node* &head) {
         
         Node* current = head;
