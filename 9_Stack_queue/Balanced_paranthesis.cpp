@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-bool isBalanced(string a) {
+bool isBalancedPrimal(string a) {
     stack<char> s;
 
     for (int i = 0; a[i]; i++) {
@@ -24,6 +24,19 @@ bool isBalanced(string a) {
         }
     }
     return s.empty();
+}
+
+bool isBalanced(string a) {
+    stack<char> s;
+
+	for (auto i : a) {
+		if (i == '{' || i == '[' || i == '(') s.push(i);
+		else {
+			if (s.empty() or (s.top()=='(' and i!=')') or (s.top()=='{' and i!='}') or (s.top()=='[' and i!=']')) return false;
+			s.pop();
+		}
+	}
+	return s.empty();
 }
 int main() {
     string a = "[{a+b*(c+d)*(d+f)}";
