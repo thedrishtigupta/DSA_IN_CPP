@@ -138,6 +138,14 @@ void LevelOrder(Node* root) {
     }
 
 }
+
+void mirror(Node* root) {
+    if(!root) return;
+
+    swap(root->left, root->right);
+    mirror(root->left);
+    mirror(root->right);
+}
 // 8 10 1 -1 -1 6 4 -1 -1 7 -1 -1 3 -1 14 13 -1 -1 -1
 int main() {
     cout<<"Enter input: ";
@@ -158,11 +166,21 @@ int main() {
     cout<<"Postorder: ";
     PostOrder(root);
     cout<<endl;
+
+    cout<<"Level order: \n";
+    LevelOrder(root);
+    cout<<endl;
+
+    mirror(root);
+    
     cout<<"Level order: \n";
     LevelOrder(root);
     cout<<endl;
 
     if(searchNode(root, 5)) cout<<"Key found"<<endl;
     else cout<<"Not present"<<endl;
+
+    
+    
     return 0;
 }
