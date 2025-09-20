@@ -1,5 +1,6 @@
 #include <iostream>
 #include<algorithm>
+#include <queue>
 using namespace std;
 
 class Node {
@@ -116,6 +117,27 @@ Node* searchNode(Node* root, int tar) {
 
     return searchNode(root->right, tar); // RST or not present, else case
 }
+
+void LevelOrder(Node* root) {
+    if(!root) return;
+    queue<Node*> q;
+    q.push(root);
+    q.push(NULL);
+
+    while(!q.empty()){
+        Node* x = q.front();
+        q.pop();
+        if (x) {
+            cout<<x->data<<" ";
+            if (x->left) q.push(x->left);
+            if (x->right) q.push(x->right);
+        } else {
+            cout<<'\n';
+            if (!q.empty()) q.push(NULL);
+        }
+    }
+
+}
 // 8 10 1 -1 -1 6 4 -1 -1 7 -1 -1 3 -1 14 13 -1 -1 -1
 int main() {
     cout<<"Enter input: ";
@@ -135,6 +157,9 @@ int main() {
     cout<<endl;
     cout<<"Postorder: ";
     PostOrder(root);
+    cout<<endl;
+    cout<<"Level order: \n";
+    LevelOrder(root);
     cout<<endl;
 
     if(searchNode(root, 5)) cout<<"Key found"<<endl;
