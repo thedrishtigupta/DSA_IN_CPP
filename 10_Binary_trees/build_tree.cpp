@@ -105,6 +105,17 @@ Pair fastDiameter(Node* root) {
 
     return p;
 }
+
+Node* searchNode(Node* root, int tar) {
+    if(!root) return NULL;
+
+    if (root->data == tar) return root;
+    
+    Node* ans = searchNode(root->left, tar); //LST, else if case
+    if (ans!= NULL) return ans;
+
+    return searchNode(root->right, tar); // RST or not present, else case
+}
 // 8 10 1 -1 -1 6 4 -1 -1 7 -1 -1 3 -1 14 13 -1 -1 -1
 int main() {
     cout<<"Enter input: ";
@@ -125,5 +136,8 @@ int main() {
     cout<<"Postorder: ";
     PostOrder(root);
     cout<<endl;
+
+    if(searchNode(root, 5)) cout<<"Key found"<<endl;
+    else cout<<"Not present"<<endl;
     return 0;
 }
