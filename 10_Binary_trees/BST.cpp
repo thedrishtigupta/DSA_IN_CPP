@@ -33,6 +33,12 @@ class Pair{
     bool isBal;
 };
 
+class LinkedList {
+    public:
+    Node* head;
+    Node* tail;
+};
+
 Node* insertBST(Node* root, int d) {
     if(!root) {
         root = new Node(d);
@@ -140,20 +146,83 @@ Pair isBalanced(Node* root) {
     return p;
 }
 
+LinkedList BSTtoLL(Node* root) {
+    LinkedList l;
+    if(!root) {
+        l.head = l.tail = NULL;
+        return l;
+    }
+
+    if(root->left and root->right) {
+        LinkedList left = BSTtoLL(root->left);
+        LinkedList right = BSTtoLL(root->right);
+
+        left.tail->right = root;
+        root->left = NULL;
+        root->right = right.head;
+
+        l.head = left.head;
+        l.tail = right.tail;
+
+        return l;
+    } else if (root->left and !root->right) {
+        LinkedList left = BSTtoLL(root->left);
+        left.tail->right = root;
+        root->left = NULL;
+
+        l.head = left.head;
+        l.tail = root;
+        return l;
+    } else if (!root->left and root->right) {
+        LinkedList right = BSTtoLL(root->right);
+        root->left = NULL;
+        root->right = right.head;
+
+        l.head = root;
+        l.tail = right.tail;
+        return l;
+    } else {
+        root->left = NULL;
+        root->right = NULL;
+        l.head = l.tail = root;
+        return l;
+    }
+}
+
+void printLL(Node* h) {
+        while (h != NULL) {
+            cout<<h->data <<" -> ";
+            h = h->right;
+        }
+        cout<<"NULL"<<endl;
+    }
+
 // 8 3 10 1 6 14 4 7 13 -1 (-1 only once)
 int main() {
     cout<<"Enter input: ";
     Node* root = buildBST();
 
-    printRange(root, 2, 10);
-    cout<<endl;
 
-    if(isBST(root)) cout<<"Is BST"<<endl;
-    else cout<<"Not BST"<<endl;
+    LinkedList l = BSTtoLL(root);
 
-    Node* searchAns = searchBST(root, 5);
-    if (searchAns) cout<<"Data found"<<endl;
-    else cout<<"Not found"<<endl;
+    printLL(l.head);
+
+
+
+
+
+    // printRange(root, 2, 10);
+    // cout<<endl;
+
+    // if(isBST(root)) cout<<"Is BST"<<endl;
+    // else cout<<"Not BST"<<endl;
+
+    // Node* searchAns = searchBST(root, 5);
+    // if (searchAns) cout<<"Data found"<<endl;
+    // else cout<<"Not found"<<endl;
+
+
+
 
     // cout<<"Preorder:";
     // PreOrder(root);
