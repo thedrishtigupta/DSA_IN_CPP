@@ -78,6 +78,7 @@ Node* inPreCreate(int* in, int s, int e, int* pre, int& k) {
             j = i; break;
         }
     }
+    if (j == -1) return NULL;
     root->left = inPreCreate(in, s, j-1, pre, k);
     root->right = inPreCreate(in, j+1, e, pre, k);
 
@@ -93,8 +94,10 @@ Node* inPostCreate(int* in, int s, int e, int* post, int&m) {
             j = i; break;
         }
     }
-    root->left = inPostCreate(in, s, j-1, post, m);
+    if (j == -1) return NULL;
     root->right = inPostCreate(in, j+1, e, post, m);
+    root->left = inPostCreate(in, s, j-1, post, m);
+    
 
     return root;
 }
