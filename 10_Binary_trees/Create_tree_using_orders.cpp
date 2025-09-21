@@ -72,7 +72,7 @@ Node* inPreCreate(int* in, int s, int e, int* pre, int& k) {
     if (s > e) return NULL;
 
     Node* root = new Node(pre[k++]);
-    int j;
+    int j = -1;
     for(int i = s; i <= e; i++) {
         if (in[i] == root->data){
             j = i; break;
@@ -86,7 +86,17 @@ Node* inPreCreate(int* in, int s, int e, int* pre, int& k) {
 
 Node* inPostCreate(int* in, int s, int e, int* post, int&m) {
     if(s > e) return NULL;
-    Node* root = 
+    Node* root = new Node(post[m--]);
+    int j = -1;
+    for(int i = s; i <= e; i++) {
+        if (in[i] == root->data){
+            j = i; break;
+        }
+    }
+    root->left = inPostCreate(in, s, j-1, post, m);
+    root->right = inPostCreate(in, j+1, e, post, m);
+
+    return root;
 }
 
 int heightTree(Node* root) {
@@ -133,9 +143,13 @@ int main() {
     int in[] = {1, 10, 4, 6, 7, 8, 3, 13, 14};
     int k = 0;
     Node* root = inPreCreate(in, 0, 8, pre, k);
+    int m = 8;
+    Node* root2 = inPostCreate(in, 0, 8, post, m);
 
-    cout<<"Level order: ";
+    cout<<"Level order: \n";
     LevelOrder(root);
+    cout<<"Level order 2: \n";
+    LevelOrder(root2);
     
 
     

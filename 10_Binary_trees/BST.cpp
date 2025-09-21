@@ -1,5 +1,7 @@
 #include <iostream>
 #include<queue>
+#include<climits>
+#include<algorithm>
 using namespace std;
 
 
@@ -23,6 +25,12 @@ class Node {
         this->left = left;
         this->right = right;
     }
+};
+
+class Pair{
+    public:
+    int height;
+    bool isBal;
 };
 
 Node* insertBST(Node* root, int d) {
@@ -88,7 +96,48 @@ void LevelOrder(Node* root) {
             if (!q.empty()) q.push(NULL);
         }
     }
+}
 
+void printRange(Node* root, int s, int e) { //Preorder format
+    if (!root) return;
+    if (root->data >= s and root->data <= e) {
+        cout<<root->data <<" ";
+    }
+    printRange(root->left, s, e);
+    printRange(root->right, s, e);
+}
+
+
+Node* searchBST(Node* root, int tar) {
+    if (!root) return NULL;
+    
+    if(root->data == tar) return root;
+    else if (root->data > tar) return searchBST(root->left, tar);
+    else return searchBST(root->right, tar);
+}
+
+bool isBST(Node* root, int min = INT_MIN, int max = INT_MAX) {
+    if (!root) return true;
+
+    return (root->data >= min && root->data <= max && isBST(root->left) && isBST(root->right));
+}
+
+Pair isBalanced(Node* root) {
+    Pair p;
+    if (!root) {
+        p.height = 0;
+        p.isBal = true;
+        return p;
+    }
+
+    Pair left = isBalanced(root->left);
+    Pair right = isBalanced(root->right);
+
+    p.height = max(left.height, right.height) +1;
+
+    p.isBal = (abs(left.height - right.height) <= 1) and left.isBal and right.isBal;
+
+    return p;
 }
 
 // 8 3 10 1 6 14 4 7 13 -1 (-1 only once)
@@ -96,20 +145,34 @@ int main() {
     cout<<"Enter input: ";
     Node* root = buildBST();
 
+    printRange(root, 2, 10);
+    cout<<endl;
 
-    cout<<"Preorder:";
-    PreOrder(root);
-    cout<<endl;
-    cout<<"Inorder: ";
-    InOrder(root);
-    cout<<endl;
-    cout<<"Postorder: ";
-    PostOrder(root);
-    cout<<endl;
+    if(isBST(root)) cout<<"Is BST"<<endl;
+    else cout<<"Not BST"<<endl;
+
+    Node* searchAns = searchBST(root, 5);
+    if (searchAns) cout<<"Data found"<<endl;
+    else cout<<"Not found"<<endl;
+
+    // cout<<"Preorder:";
+    // PreOrder(root);
+    // cout<<endl;
+    // cout<<"Inorder: ";
+    // InOrder(root);
+    // cout<<endl;
+    // cout<<"Postorder: ";
+    // PostOrder(root);
+    // cout<<endl;
 
     cout<<"Level order: \n";
     LevelOrder(root);
     cout<<endl;
+
+    Pair p = isBalanced(root);
+    if(p.isBal) cout<<"Balanced"<<endl;
+    else cout<<"Not balanced"<<endl;
+
 
     return 0;
 }
