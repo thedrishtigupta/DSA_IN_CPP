@@ -190,26 +190,35 @@ LinkedList BSTtoLL(Node* root) {
 }
 
 void printLL(Node* h) {
-        while (h != NULL) {
-            cout<<h->data <<" -> ";
-            h = h->right;
-        }
-        cout<<"NULL"<<endl;
+    while (h != NULL) {
+        cout<<h->data <<" -> ";
+        h = h->right;
     }
+    cout<<"NULL"<<endl;
+}
+
+Node* ARRtoBST(int* arr, int s, int e) {
+    if (s > e) return NULL;
+
+    int mid = s + ((e-s)/2);
+    Node* root = new Node(arr[mid]);
+    root->left = ARRtoBST(arr, s, mid-1);
+    root->right = ARRtoBST(arr, mid+1, e);
+    return root;
+}
 
 // 8 3 10 1 6 14 4 7 13 -1 (-1 only once)
 int main() {
-    cout<<"Enter input: ";
-    Node* root = buildBST();
+    // cout<<"Enter input: ";
+    // Node* root = buildBST();
+
+    int arr[] = {1,2,3,4,5,6};
+    Node* root = ARRtoBST(arr, 0, 5);
 
 
-    LinkedList l = BSTtoLL(root);
+    // LinkedList l = BSTtoLL(root);
 
-    printLL(l.head);
-
-
-
-
+    // printLL(l.head);
 
     // printRange(root, 2, 10);
     // cout<<endl;
@@ -238,9 +247,9 @@ int main() {
     LevelOrder(root);
     cout<<endl;
 
-    Pair p = isBalanced(root);
-    if(p.isBal) cout<<"Balanced"<<endl;
-    else cout<<"Not balanced"<<endl;
+    // Pair p = isBalanced(root);
+    // if(p.isBal) cout<<"Balanced"<<endl;
+    // else cout<<"Not balanced"<<endl;
 
 
     return 0;
