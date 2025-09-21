@@ -65,11 +65,22 @@ void PostOrder(Node* root) {
     cout<<root->data<<" ";
 }
 
+int pre[] = {8, 10, 1, 6, 4, 7, 3, 14, 13};
+int k = 0;
+Node* inPreCreate(int* in, int s, int e) {
+    if (s > e) return NULL;
 
+    Node* root = new Node(pre[k++]);
+    int j;
+    for(int i = s; i <= e; i++) {
+        if (in[i] == root->data){
+            j = i; break;
+        }
+    }
+    root->left = inPreCreate(in, s, j-1);
+    root->right = inPreCreate(in, j+1, e);
 
-int countNodes(Node* root) {
-    if(!root) return 0;
-    return countNodes(root->left) + countNodes(root->right) + 1;
+    return root;
 }
 
 int heightTree(Node* root) {
@@ -78,36 +89,6 @@ int heightTree(Node* root) {
     return max(heightTree(root->left), heightTree(root->right))+1;
 }
 
-int diameterTree(Node* root) {
-    if(!root) return 0;
-
-    int op1 = heightTree(root->left) + heightTree(root->right); // max diameter via root node
-    int op2 = diameterTree(root->left); // LST ka maximum diameter
-    int op3 = diameterTree(root->right); // RST ka maximum diameter
-
-    return max(op1, max(op2, op3));
-}
-
-Pair fastDiameter(Node* root) {
-    Pair p;
-    if (!root) {
-        p.height = p.dia = 0;
-        return p;
-    }
-
-    Pair left = fastDiameter(root->left);
-    Pair right = fastDiameter(root->right);
-
-    p.height = max(left.height, right.height) +1;
-
-    int op1 = left.height + right.height;
-    int op2 = left.dia;
-    int op3 = right.dia;
-
-    p.dia = max(op1, max(op2, op3));
-
-    return p;
-}
 
 Node* searchNode(Node* root, int tar) {
     if(!root) return NULL;
@@ -141,46 +122,15 @@ void LevelOrder(Node* root) {
 
 }
 
-void mirror(Node* root) {
-    if(!root) return;
-
-    swap(root->left, root->right);
-    mirror(root->left);
-    mirror(root->right);
-}
 // 8 10 1 -1 -1 6 4 -1 -1 7 -1 -1 3 -1 14 13 -1 -1 -1
 int main() {
-    cout<<"Enter input: ";
-    
-    Node* root = buildTree();
-    cout<<"Total nodes = "<<countNodes(root)<<endl;
-    cout<<"Height of tree = "<<heightTree(root)<<endl;
-    cout<<"Diameter of tree = "<<diameterTree(root)<<endl;
-    Pair p = fastDiameter(root);
-    cout<<"Fast height= "<<p.height<<endl;
-    cout<<"Fast diameter= "<<p.dia<<endl;
-    cout<<"Preorder:";
-    PreOrder(root);
-    cout<<endl;
-    cout<<"Inorder: ";
-    InOrder(root);
-    cout<<endl;
-    cout<<"Postorder: ";
-    PostOrder(root);
-    cout<<endl;
+    int in[] = {1, 10, 4, 6, 7, 8, 3, 13, 14};
+    int n = sizeof(in[])/sizeof(in[0]);
+    Node* root = inPreCreate(in, 0, 8);
 
-    cout<<"Level order: \n";
+    cout<<"Level order: ";
     LevelOrder(root);
-    cout<<endl;
-
-    mirror(root);
     
-    cout<<"Level order: \n";
-    LevelOrder(root);
-    cout<<endl;
-
-    if(searchNode(root, 5)) cout<<"Key found"<<endl;
-    else cout<<"Not present"<<endl;
 
     
     
