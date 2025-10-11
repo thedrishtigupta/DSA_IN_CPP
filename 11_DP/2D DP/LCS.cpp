@@ -1,9 +1,10 @@
 #include <iostream>
 #include<string>
 #include<vector>
+#include<algorithm>
 using namespace std;
 
-int lcs (string s1, string s2, int n, int m, vector<vector<int>>& dp) {
+int lcs (string& s1, string& s2, int n, int m, vector<vector<int>>& dp) {
     if(n == 0 or m == 0) return dp[n][m] = 0;
 
     if(dp[n][m] != -1) return dp[n][m];
@@ -16,7 +17,7 @@ int lcs (string s1, string s2, int n, int m, vector<vector<int>>& dp) {
     }
 }
 
-int lcsBottomUp(string s1, string s2, int n, int m) {
+int lcsBottomUp(string& s1, string& s2, int n, int m) {
     vector<vector<int>> dp(n+1, vector<int>(m+1, 0));
 
     for(int i = 1; i <= n; i++) {
@@ -28,6 +29,19 @@ int lcsBottomUp(string s1, string s2, int n, int m) {
 
     return dp[n][m];
 }
+
+void lcsSeqPrint(string& s1, string& s2, vector<vector<int>>& dp, int n, int m) {
+    string ans = "";
+    while(n > 0 && m > 0) {
+        if(s1[n-1] == s2[m-1]) {
+            ans.push_back(s1[n-1]);
+            n--; m--;
+        } else if (dp[n-1][m] == dp[n][m]) n--;
+        else m--;
+    }
+    reverse(ans.begin(), ans.end());
+    cout<<"LCS: "<<ans<<endl;
+}
 int main() {
     string s1 = "abcde";
     string s2 = "bcde";
@@ -35,5 +49,6 @@ int main() {
     vector<vector<int>> dp(n+1, vector<int>(m+1, -1));
     cout<<lcs(s1, s2, 5, 4, dp)<<endl;
     cout<<lcsBottomUp(s1, s2, n, m) <<endl;
+    lcsSeqPrint(s1, s2, dp, n, m);
     return 0;
 }
