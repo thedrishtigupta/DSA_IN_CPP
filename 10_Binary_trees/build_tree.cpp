@@ -153,12 +153,12 @@ int main() {
     cout<<"Enter input: ";
     
     Node* root = buildTree();
-    cout<<"Total nodes = "<<countNodes(root)<<endl;
-    cout<<"Height of tree = "<<heightTree(root)<<endl;
-    cout<<"Diameter of tree = "<<diameterTree(root)<<endl;
-    Pair p = fastDiameter(root);
-    cout<<"Fast height= "<<p.height<<endl;
-    cout<<"Fast diameter= "<<p.dia<<endl;
+    // cout<<"Total nodes = "<<countNodes(root)<<endl;
+    // cout<<"Height of tree = "<<heightTree(root)<<endl;
+    // cout<<"Diameter of tree = "<<diameterTree(root)<<endl;
+    // Pair p = fastDiameter(root);
+    // cout<<"Fast height= "<<p.height<<endl;
+    // cout<<"Fast diameter= "<<p.dia<<endl;
     cout<<"Preorder:";
     PreOrder(root);
     cout<<endl;
@@ -173,14 +173,14 @@ int main() {
     LevelOrder(root);
     cout<<endl;
 
-    mirror(root);
+    // mirror(root);
     
-    cout<<"Level order: \n";
-    LevelOrder(root);
-    cout<<endl;
+    // cout<<"Level order: \n";
+    // LevelOrder(root);
+    // cout<<endl;
 
-    if(searchNode(root, 5)) cout<<"Key found"<<endl;
-    else cout<<"Not present"<<endl;
+    // if(searchNode(root, 5)) cout<<"Key found"<<endl;
+    // else cout<<"Not present"<<endl;
 
     
     
