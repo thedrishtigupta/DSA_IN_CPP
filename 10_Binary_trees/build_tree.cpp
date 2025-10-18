@@ -1,6 +1,7 @@
 #include <iostream>
 #include<algorithm>
 #include <queue>
+#include<unordered_map>
 using namespace std;
 
 class Node {
@@ -42,6 +43,12 @@ Node* buildTree() {
     root->right = buildTree();
 
     return root;
+}
+
+void maxFreqSum (Node* root, unordered_map<int, int>& freq) {
+    if(!root) return freq[root->data] = 0;
+
+    
 }
 
 void PreOrder(Node* root) {
@@ -153,6 +160,8 @@ int main() {
     cout<<"Enter input: ";
     
     Node* root = buildTree();
+
+    unordered_map<int, int> freq;
     // cout<<"Total nodes = "<<countNodes(root)<<endl;
     // cout<<"Height of tree = "<<heightTree(root)<<endl;
     // cout<<"Diameter of tree = "<<diameterTree(root)<<endl;
