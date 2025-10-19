@@ -135,7 +135,7 @@ Pair isBalanced(Node* root) {
         p.isBal = true;
         return p;
     }
-
+1
     Pair left = isBalanced(root->left);
     Pair right = isBalanced(root->right);
 
