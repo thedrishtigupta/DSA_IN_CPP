@@ -55,6 +55,24 @@ public:
         }
 
     }
+
+    void topologicalSortHelper(T src, deque<T> &q, unordered_map<T, bool>& visited) {
+        for(auto ch : adj[src]) {
+            if(!visited[ch]) topologicalSortHelper(ch, q, visited);
+        }
+        visited[src] = true;
+        q.push_front(src);
+    }
+
+    void topologicalDFS() {
+        deque<T> q;
+        unordered_map<T, bool> visited;
+
+        for(auto p : adj) {
+            if(!visited[p.first]) topologicalSortHelper(p.first, q, visited);
+        }
+        for(auto d : q) cout<<d<<" ";
+    }
 };
 
 
@@ -70,7 +88,7 @@ int main() {
     g.addEdge("DS", "Web3");
     g.addEdge("Android", "CS");
 
-	g.topologicalSort();
+	g.topologicalDFS();
 
 	return 0;
 }
