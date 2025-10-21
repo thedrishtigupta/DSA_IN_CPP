@@ -174,6 +174,15 @@ class LinkedList {
     }
 };
 
+Node* reverseLLRec(Node* curr, Node* prev = NULL) {
+    if(!curr) return prev;
+
+    n = curr->next;
+    curr->next = prev;
+
+    return reverseLLRec(n, curr);
+}
+
 // void printLL(Node* h) {
 //     while (h != NULL) {
 //         cout<<h->data <<" -> ";
