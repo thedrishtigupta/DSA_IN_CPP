@@ -41,7 +41,7 @@ class Trie {
         temp->isEnd = true;
     }
 
-    void autofillHelper(Node* temp, string x) {
+    void autofillHelper(Node* temp, string &x) {
 
         if(temp->isEnd) cout<<x<<endl;
 
@@ -51,7 +51,7 @@ class Trie {
 
             autofillHelper(p.second, x);
 
-            x.pop_back(); // backtrack
+            x.pop_back(); // backtrack because we are passing original string x, if we use string x only, then no backtrack required
         }
     }
 
