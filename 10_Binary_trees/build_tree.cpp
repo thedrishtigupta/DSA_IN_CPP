@@ -45,6 +45,19 @@ Node* buildTree() {
     return root;
 }
 
+Node* buildTreeInorder() {
+    int d; cin>>d;
+    if(d == -1) return NULL;
+
+    Node* left = buildTreeInorder();
+    Node* root = new Node(d);
+    root->left = left;
+    root->right = buildTreeInorder();
+
+    return root;
+}
+
+
 void maxFreqSum (Node* root, unordered_map<int, int>& freq) {
     if(!root) return freq[root->data] = 0;
 
