@@ -17,12 +17,15 @@ int lcs (string& s1, string& s2, int n, int m, vector<vector<int>>& dp) {
     }
 }
 
-int lcsBottomUp(string& s1, string& s2, int n, int m) {
+int lcsBottomUp(string& s1, string& s2, int n, int m, string& ans) {
     vector<vector<int>> dp(n+1, vector<int>(m+1, 0));
 
     for(int i = 1; i <= n; i++) {
         for(int j = 1; j <= m; j++) {
-            if(s1[i-1] == s2[j-1]) dp[i][j] = 1 + dp[i-1][j-1];
+            if(s1[i-1] == s2[j-1]) {
+                dp[i][j] = 1 + dp[i-1][j-1];
+                ans.push_back(s1[i-1]);
+            }
             else dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
         }
     }
@@ -46,9 +49,11 @@ int main() {
     string s1 = "abcde";
     string s2 = "bcde";
     int n = 5, m = 4;
+    string ans;
     vector<vector<int>> dp(n+1, vector<int>(m+1, -1));
     cout<<lcs(s1, s2, 5, 4, dp)<<endl;
-    cout<<lcsBottomUp(s1, s2, n, m) <<endl;
-    lcsSeqPrint(s1, s2, dp, n, m);
+    cout<<lcsBottomUp(s1, s2, n, m, ans) <<endl;
+    cout<<ans<<endl;
+    //lcsSeqPrint(s1, s2, dp, n, m);
     return 0;
 }

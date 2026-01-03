@@ -41,8 +41,7 @@ class LinkedList {
 
 Node* insertBST(Node* root, int d) {
     if(!root) {
-        root = new Node(d);
-        return root;
+        return new Node(d);
     }
 
     if (root->data > d) root->left = insertBST(root->left, d);
