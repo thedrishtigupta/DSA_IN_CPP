@@ -9,9 +9,8 @@ vector<int> floor_ceil(vector<int>& arr, int x) {
 
     while (i <= j) {
         int m = i + ((j-i)/2);
-        if (arr[m] == x) {
-            ans[0] = x, ans[1] = x; break;
-        } else if (arr[m] > x) {
+        if (arr[m] == x) return {x, x};
+        else if (arr[m] > x) {
             ans[1] = arr[m];
             j = m-1;
         } else {
