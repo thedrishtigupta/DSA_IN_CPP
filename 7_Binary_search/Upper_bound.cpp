@@ -6,7 +6,7 @@ int upper_bound(vector<int> arr, int x) {
     while (i <= j) {
         int m = i + ((j-i)/2);
         if (x >= arr[m]) i = m+1;
-        else if (x < arr[m]) {
+        else {
             j = m - 1;
             ans = m;
         }
@@ -22,7 +22,7 @@ int main() {
     while (i <= j) {
         int m = i + ((j-i)/2);
         if (x >= arr[m]) i = m+1;
-        else if (x < arr[m]) {
+        else {
             j = m - 1;
             ans = m;
         }
