@@ -7,7 +7,7 @@ int lower_bound(vector<int> arr, int x) {
     while (i <= j) {
         int m = i + ((j-i)/2);
         if (x > arr[m]) i = m+1;
-        else if (x <= arr[m]) {
+        else {
             j = m -1;
             ans = m;
             if (arr[m-1] != x) break;
@@ -25,7 +25,7 @@ int main() {
     while (i <= j) {
         int m = i + ((j-i)/2);
         if (x > arr[m]) i = m+1;
-        else if (x <= arr[m]) {
+        else {
             j = m -1;
             ans = m;
             if (arr[m-1] != x) break;
