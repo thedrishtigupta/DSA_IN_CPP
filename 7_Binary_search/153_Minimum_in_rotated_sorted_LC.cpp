@@ -40,7 +40,7 @@ nums is sorted and rotated between 1 and n times.
 */
 
 
-class Solution {
+class Solution1 {
 public:
     int findMin(vector<int>& a) {
         int i = 0, j = a.size() - 1, ans = INT_MAX;
@@ -53,5 +53,19 @@ public:
             else {ans = min(ans, a[m]); j = m-1;}
         }
         return ans;
+    }
+};
+
+class Solution {
+public:
+    int findMin(vector<int>& a) {
+        int i = 0, j = a.size() - 1;
+        
+        while (i < j) {
+            int m = i + ((j-i)/2);
+            if (a[m] > a[j]) i=m+1;
+            else j=m;
+        }
+        return a[i];
     }
 };
