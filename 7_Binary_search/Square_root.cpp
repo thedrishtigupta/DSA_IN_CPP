@@ -2,7 +2,7 @@
 using namespace std;
 
 int square_root(int n) {
-    int i = 1, j = n;
+    int i = 1, j = n/2;
 
     while (i <= j) {
         long long m = i + ((j-i)/2);
@@ -10,12 +10,12 @@ int square_root(int n) {
 
         if (val == n) return m;
         else if (val > n) j = m-1;
-        else i = m+1; 
+        else i = m+1;
     }
     return j;
 }
 int main() {
-    int n = 28;
+    int n = 41;
     cout<<square_root(n);
     return 0;
 }
