@@ -6,7 +6,11 @@ int root (int n, int m) {
 
     while (i <= j) {
         int mid = i + ((j-i)/2);
-        int power = (int)(pow(mid, n));
+        int power = 1;
+        for(int i = 0; i < n; i++) {
+            power *= mid;
+            if (power > m) break;
+        }
         if (power == m) return mid;
         else if (power < m) i = mid+1;
         else j = mid-1;
@@ -14,8 +18,8 @@ int root (int n, int m) {
     return -1;
 }
 int main() {
-    int n = 4;
-    int m = 69;
+    int n = 3;
+    int m = 27;
     cout<<root(n, m);
     return 0;
 }
