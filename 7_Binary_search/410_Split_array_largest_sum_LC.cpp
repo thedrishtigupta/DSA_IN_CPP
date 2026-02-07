@@ -8,6 +8,7 @@ Return the minimized largest sum of the split.
 
 A subarray is a contiguous part of the array.
 
+    - Similar to Painter's Partition problem, same code.
 
 Example 1:
 
