@@ -29,7 +29,7 @@ int painter(vector<int>& arr, int k) {
     return i;
 }
 int main() {
-    vector<int> arr = {7, 2, 5, 10, 8};
+    vector<int> arr = {10, 20, 30, 40};
     int k = 2;
 
     cout<<painter(arr, k);
