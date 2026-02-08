@@ -13,17 +13,14 @@ int findKth(vector<int>& A, vector<int>& B, int k) {
 
     int i = max(0, k - n2);
     int j = min(k, n1);
-    
+
     while(i <= j) {
-        int m1 = (i+j) >> 1;
-        int m2 = k - m1;
+        int m1 = (i+j) >> 1, m2 = k - m1;
 
-        int l1 = INT_MIN, l2 = INT_MIN, r1 = INT_MAX, r2 = INT_MAX;
-
-        if(m1 < n1) r1 = A[m1];
-        if(m2 < n2) r2 = B[m2];
-        if(m1 - 1 >= 0) l1 = A[m1 - 1];
-        if(m2 - 1 >= 0) l2 = B[m2 - 1];
+        int l1 = m1 - 1 >= 0 ? A[m1 - 1] : INT_MIN;
+        int l2 = m2 - 1 >= 0 ? B[m2 - 1] : INT_MIN;
+        int r1 = m1 < n1 ? A[m1] : INT_MAX;
+        int r2 = m2 < n2 ? B[m2] : INT_MAX;
 
         if (l1 <= r2 && l2 <= r1) return max(l1, l2);
         else if (l1 > r2) j = m1 - 1;
