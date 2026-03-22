@@ -32,7 +32,7 @@ class Graph {
 
         q.push(src);
         visited[src] = true;
-
+        cout<<"BFS: ";
         while(!q.empty()) {
             T u = q.front(); q.pop();
             cout<<u<<" ";
@@ -44,6 +44,23 @@ class Graph {
                 }
             }
         }
+        cout<<endl;
+    }
+
+    void dfsHelper(T u, unordered_map<T, bool>& visited) {
+        cout<<u<<" ";
+        visited[u] = true;
+
+        for(auto& v : adj[u]){
+            if (!visited[v]) dfsHelper(v, visited);
+        }
+    }
+
+    void dfs(T src) {
+        unordered_map<T, bool> visited;
+        cout<<"DFS: ";
+        dfsHelper(src, visited);
+        cout<<endl;
     }
 };
 
@@ -53,10 +70,12 @@ int main() {
     g.addEdge(0, 1);
     g.addEdge(1, 2);
     g.addEdge(1,3);
-    g.addEdge(2,3);
+    g.addEdge(2,4);
+    g.addEdge(3, 5);
 
     g.print();
 
     g.bfs(0);
+    g.dfs(0);
     return 0;
 }
