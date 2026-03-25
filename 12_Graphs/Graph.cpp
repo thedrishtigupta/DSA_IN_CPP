@@ -62,12 +62,30 @@ class Graph {
         dfsHelper(src, visited);
         cout<<endl;
     }
+    bool isCyclicHelper(T src, unordered_map<T, bool>& visited, T parent) {
+
+        visited[src] = true;
+
+        for(auto& v : adj[src]) {
+            if (!visited[v]) return isCyclicHelper(v, visited, src);
+            else if (v != parent) return true;
+        }
+        return false;
+    }
+    void isCyclic(T src) {
+        unordered_map<T, bool> visited;
+        cout<<"Is Cyclic: ";
+        bool ans = isCyclicHelper(src, visited, -1);
+        if (ans) cout<<"true"<<endl;
+        else cout<<"false"<<endl;
+    }
 };
 
 int main() {
     Graph<int> g;
 
     g.addEdge(0, 1);
+    g.addEdge(0, 2);
     g.addEdge(1, 2);
     g.addEdge(1,3);
     g.addEdge(2,4);
@@ -77,5 +95,6 @@ int main() {
 
     g.bfs(0);
     g.dfs(0);
+    g.isCyclic(0);
     return 0;
 }
