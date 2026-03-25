@@ -79,13 +79,36 @@ class Graph {
         if (ans) cout<<"true"<<endl;
         else cout<<"false"<<endl;
     }
+
+    bool isCyclicBFS(T src) {
+        queue<T> q;
+        unordered_map<T, bool> visited;
+        unordered_map<T, T> parent;
+
+        visited[src] = true;
+        parent[src] = -1;
+        q.push(src);
+        cout<<"Is Cyclic (BFS): ";
+        while(!q.empty()) {
+            T u = q.front(); q.pop();
+
+            for(auto& v : adj[u]) {
+                if (!visited[v]) {
+                    visited[v] = true;
+                    parent[v] = u;
+                    q.push(v);
+                } else if (v != parent[u]) return true;
+            }
+        }
+        return false;
+    }
 };
 
 int main() {
     Graph<int> g;
 
     g.addEdge(0, 1);
-    g.addEdge(0, 2);
+    // g.addEdge(0, 2);
     g.addEdge(1, 2);
     g.addEdge(1,3);
     g.addEdge(2,4);
@@ -96,5 +119,9 @@ int main() {
     g.bfs(0);
     g.dfs(0);
     g.isCyclic(0);
+
+    bool ans = g.isCyclicBFS(0);
+    if (ans) cout<<"true"<<endl;
+    else cout<<"false"<<endl;
     return 0;
 }
