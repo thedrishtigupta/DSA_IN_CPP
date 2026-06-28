@@ -42,3 +42,22 @@ public:
         return t[n];
     }
 };
+
+//Constant space
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+
+        int minus2 = 0, minus1 = nums[0];
+        int ans = nums[0];
+
+        for(int i = 2; i <= n; i++) {
+            ans = max(nums[i-1] + minus2, minus1);
+            minus2 = minus1;
+            minus1 = ans;
+        }
+
+        return ans;
+    }
+};
